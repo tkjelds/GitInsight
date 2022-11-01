@@ -34,8 +34,8 @@ jobs:
       - name: Build
         run: dotnet build --configuration Release
 
-      - name: ExtractFilesForTest
-        run: 7z x TestRepos.Zip
+      - name: Extract Files For Test
+        run:  Expand-Archive -Path TestRepos.Zip -DestinationPath . 
 
       - name: Test
         run: dotnet test
