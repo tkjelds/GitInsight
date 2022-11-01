@@ -35,4 +35,4 @@ jobs:
         run: dotnet build --configuration Release
 
       - name: Test
-        run: 7z x TestRepos.zip -o. && dotnet test
+        run: 7z x TestRepos.zip -o/home/runner/work/GitInsight/GitInsight && dotnet test
