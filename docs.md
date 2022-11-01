@@ -2,11 +2,7 @@
 
 # Proposed System
 
-## Overview
-
-
-
-## Functional requirements:
+## Functional requirements
 
 **User requirements:**
 * The system must be able to run from the command line.
@@ -19,10 +15,11 @@
 ## Nonfunctional Requirements
 
 **Usability:**
-* A user should be able to run the program in commit frequency mode .
+* Users should always be able to choose which mode to run the program in by giving an argument when starting the program.
 
 **Reliability:**
-* 
+* Users should be able to successfully run the program in commit frequency mode 99% of the time without failure.
+* Users should be able to successfully run the program in commit author mode 99% of the time without failure.
 
 **Performance:**
 * The system should be able to produce a textual output on stdout when running commit frequency mode within 3 seconds.
@@ -31,7 +28,7 @@
 **Supportability:**
 * The developers should follow the SOLID principles.
 * The developers should follow the test driven development approach.
-* The system structure should follow the rules of clean architecture.
+* The structure of the system should follow the rules of clean architecture.
 
 **Implementation:**
 * The system should be using ASP.NET Core framework.
@@ -47,4 +44,57 @@ We are avoiding interactive input/output.
 **Maybe**
 Might use CommandLineParser if more command arguments become necessary.
 
-## Use cases:
+
+## System Models
+
+### Scenarios
+
+### Use Cases
+Use case name
+Partcipating actors
+**Flow of events**
+* 1
+* 2
+* 3
+* 4
+* 5 
+Entry conditions
+Exit conditions
+Quality requirements
+
+### Class Diagrams
+
+```mermaid
+  classDiagram
+    IStrategy <|-- AuthorMode
+    IStrategy <|-- FrequenceMode
+    IStrategy --o Program
+    
+    class IStrategy {
+        <<Interface>>
+        IStrategy: +Assemble()
+        IStrategy: +Print()
+    }
+
+    class AuthorMode{
+        +ICollection authorNumberCommitsDaily
+        +Assemble()
+        +Print()
+    }
+    class FrequenceMode{
+        +ICollection numberCommitsDaily
+        +Assemble()
+        +Print()
+    }
+    class Program{
+        +Main()
+    }
+```
+
+## Dynamic Models
+
+### Sequence diagram
+
+### Collaboration diagram
+
+### Statechart diagrams
