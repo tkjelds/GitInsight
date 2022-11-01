@@ -3,6 +3,8 @@ namespace GitInsight.test;
 public class AuthorModeTests
 {
     // Repository repo;
+
+    //
     // public AuthorModeTests()
     // {
     //     //Instantiate repo
