@@ -10,7 +10,7 @@ public class FrequenceModeTests
     FrequenceMode _freq;
     public FrequenceModeTests()
     {
-        var path = Directory.GetParent(Directory.GetCurrentDirectory())!.Parent!.Parent!.Parent!.FullName;
+        string path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName;
         var target = @"\TestRepos\su19-grp7";
         var repo = new Repository(path + target);
         FrequenceMode freq = new FrequenceMode();
