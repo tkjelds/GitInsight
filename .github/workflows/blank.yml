@@ -34,17 +34,5 @@ jobs:
       - name: Build
         run: dotnet build --configuration Release
 
-      - name: Extract Action
-        # You may pin to the exact commit or the version.
-        # uses: ihiroky/extract-action@2bdc0b8926237c3829211a3e21ad129ce2769d05
-        uses: ihiroky/extract-action@v1
-        with:
-          # File path to extract.
-          file_path: TestRepos.zip 
-          # Directory path to extract archive.
-          extract_dir: .
-          # Shows details about the result of running this action.
-          verbose: true
-
       - name: Test
-        run: dotnet test
+        run: 7z x TestRepos.zip -o. && dotnet test
