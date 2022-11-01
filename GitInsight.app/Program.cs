@@ -4,6 +4,9 @@
     {
         private static void Main(string[] args)
         {
+            // var path = Directory.GetCurrentDirectory();
+            // var target = @"\GitInsight.test\TestRepos\su19-grp7";
+            // Console.WriteLine(path + target); 
             List<IStrategy> strategies = new List<IStrategy> {
                 new FrequenceMode(),
                 new AuthorMode()

@@ -10,7 +10,9 @@
 *.userosscache
 *.sln.docstates
 
-GitInsight.test/TestRepos
+# TestRepoDirectory
+TestRepos/
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
