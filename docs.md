@@ -50,17 +50,26 @@ Might use CommandLineParser if more command arguments become necessary.
 ### Scenarios
 
 ### Use Cases
-Use case name
-Partcipating actors
-**Flow of events**
-* 1
-* 2
-* 3
-* 4
-* 5 
-Entry conditions
-Exit conditions
-Quality requirements
+
+| Use case name        |                         |
+|----------------------|-------------------------|
+| Participating actors | Initiated by user       |
+| Flow of events       | 1.                      |
+|                      | 2.                      |
+|                      | 3.                      |
+|                      | 4.                      |
+|                      | 5.                      |
+|                      | 6.                      |
+| Entry conditions     | -                       |
+|                      | -                       |
+|                      | -                       |
+| Exit conditions      | -                       |
+|                      | -                       |
+|                      | -                       |
+| Quality requirements | -                       |
+|                      | -                       |
+|                      | -                       |
+|                      | -                       |
 
 ### Class Diagrams
 
@@ -72,17 +81,17 @@ Quality requirements
     
     class IStrategy {
         <<Interface>>
-        IStrategy: +Assemble()
-        IStrategy: +Print()
+        +IStrategy Assemble()
+        +IStrategy Print()
     }
 
     class AuthorMode{
-        +ICollection authorNumberCommitsDaily
+        +authorNumberCommitsDaily: ICollection
         +Assemble()
         +Print()
     }
     class FrequenceMode{
-        +ICollection numberCommitsDaily
+        +numberCommitsDaily: ICollection
         +Assemble()
         +Print()
     }
