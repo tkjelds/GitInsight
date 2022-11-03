@@ -2,24 +2,26 @@ public class AuthorMode : IStrategy
 {
     public ICollection<(string,ICollection<(int,string)>)> authorNumberCommitsDaily;
 
-    public void Assemble(Repository _repo)
+    public void Assemble(string path)
     {
-        var _authorNumberCommitsDaily = new List<(string,ICollection<(int,string)>)> ();
-        var commitsByAuthor = _repo.Commits.GroupBy(d => d.Author.Name);
+        using(Repository _repo = new Repository(path)){
+            var _authorNumberCommitsDaily = new List<(string,ICollection<(int,string)>)> ();
+            var commitsByAuthor = _repo.Commits.GroupBy(d => d.Author.Name);
 
-        foreach (var a in commitsByAuthor)
-        {
-            var author = (a.Key);
-            
-            var commitsByDate = a.GroupBy(d => d.Author.When.ToString("yyyy-MM-dd"));
-            var numberCommitsDaily = new List<(int,string)> ();
-            foreach (var d in commitsByDate)
+            foreach (var a in commitsByAuthor)
             {
-                numberCommitsDaily.Add((d.Count(),d.Key));
+                var author = (a.Key);
+                
+                var commitsByDate = a.GroupBy(d => d.Author.When.ToString("yyyy-MM-dd"));
+                var numberCommitsDaily = new List<(int,string)> ();
+                foreach (var d in commitsByDate)
+                {
+                    numberCommitsDaily.Add((d.Count(),d.Key));
+                }
+                _authorNumberCommitsDaily.Add((author,numberCommitsDaily));
             }
-            _authorNumberCommitsDaily.Add((author,numberCommitsDaily));
-        }
-        authorNumberCommitsDaily = _authorNumberCommitsDaily;
+            authorNumberCommitsDaily = _authorNumberCommitsDaily;
+        } 
     }
     
     public void Print()

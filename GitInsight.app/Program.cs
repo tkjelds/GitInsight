@@ -13,10 +13,9 @@
             };
 
             var strategy = strategies[Int16.Parse(args[1])];
-            using(var repo = new Repository(args[0])){
-                strategy.Assemble(repo);
-                strategy.Print();
-            }
+            strategy.Assemble(args[0]);
+            strategy.Print();
+
         }
     }  
 }

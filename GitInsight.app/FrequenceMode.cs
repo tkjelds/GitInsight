@@ -2,10 +2,11 @@ public class FrequenceMode : IStrategy
 {
     public ICollection<(int,string)> NumberCommitsDaily;
 
-    public void Assemble(Repository _repo)
+    public void Assemble(String path)
     {
+        using(Repository _repo = new Repository(path)){
         var _NumberCommitsDaily = new List<(int,string)> ();
-        var groupedByDate = _repo.Commits.GroupBy(c => c.Author.When.DateTime.ToShortDateString());
+        var groupedByDate = _repo.Commits.GroupBy(c => c.Author.When.DateTime.ToString("dd-MM-yyyy"));
         foreach (var _date_ in groupedByDate)
         {
             var CommitAmount = 0;
@@ -17,6 +18,8 @@ public class FrequenceMode : IStrategy
             _NumberCommitsDaily.Add((CommitAmount,date));
         }
         NumberCommitsDaily = _NumberCommitsDaily;
+        }
+        
     }
 
     public void Print()

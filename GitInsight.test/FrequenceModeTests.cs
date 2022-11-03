@@ -11,10 +11,9 @@ public class FrequenceModeTests
     public FrequenceModeTests()
     {
         string path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName;
-        var target = @"\TestRepos\su19-grp7";
-        var repo = new Repository(path + target);
+        var target = @"/TestRepos/su19-grp7";
         FrequenceMode freq = new FrequenceMode();
-        freq.Assemble(repo);
+        freq.Assemble(path + target);
         _freq = freq;
     }
 
@@ -25,7 +24,7 @@ public class FrequenceModeTests
         //Act
         var actual = _freq.NumberCommitsDaily.First().Item2;
         // Assert
-        Assert.Equal("10/05/2019",actual);
+        Assert.Equal("10-05-2019",actual);
     }
     // [Fact]
     // public void TestFreqGetCorrectAmountOfDifferentDates()

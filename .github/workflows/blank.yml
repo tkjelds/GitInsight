@@ -24,7 +24,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v2
+        uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 6.0.x
 
@@ -33,18 +33,18 @@ jobs:
 
       - name: Build
         run: dotnet build --configuration Release
-        
-      #- name: Extract Action
+      
+      - name: Extract Action
         # You may pin to the exact commit or the version.
-        # uses: ihiroky/extract-action@2bdc0b8926237c3829211a3e21ad129ce2769d05
-        #uses: ihiroky/extract-action@v1
-        #with:
+        #uses: ihiroky/extract-action@2bdc0b8926237c3829211a3e21ad129ce2769d05
+        uses: ihiroky/extract-action@v1
+        with:
           # File path to extract.
-          #file_path: TestRepos.zip 
+          file_path: TestRepos.zip 
           # Directory path to extract archive.
-          #extract_dir: .
+          extract_dir: .
           # Shows details about the result of running this action.
-          #verbose: true
-          
+          verbose: true
+
       - name: Test
         run: dotnet test

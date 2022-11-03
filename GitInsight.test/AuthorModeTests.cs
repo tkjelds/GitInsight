@@ -8,9 +8,8 @@ public class AuthorModeTests
     {
         var path = Directory.GetParent(Directory.GetCurrentDirectory())!.Parent!.Parent!.Parent!.FullName;
         var target = @"\TestRepos\su19-grp7";
-        var repo = new Repository(path + target);
         AuthorMode auth = new AuthorMode();
-        auth.Assemble(repo);
+        auth.Assemble(path + target);
         _auth = auth;
     }
 
