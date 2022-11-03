@@ -11,4 +11,9 @@
     <PackageReference Include="LibGit2Sharp" Version="0.26.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GitInsight.Core\GitInsight.Core.csproj" />
+    <ProjectReference Include="..\GitInsight.Infrastructure\GitInsight.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
