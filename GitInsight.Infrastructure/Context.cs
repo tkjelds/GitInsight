@@ -6,7 +6,7 @@ public sealed class Context : DbContext
     public DbSet<Commit> Commits => Set<Commit>();
     public DbSet<Repository> Repositories => Set<Repository>();
 
-    public Context(DbContextOptions<Context> options):base(options)
+    public Context(DbContextOptions<Context> options) : base(options)
     {
     }
 
