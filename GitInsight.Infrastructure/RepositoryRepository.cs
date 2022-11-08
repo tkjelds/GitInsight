@@ -2,6 +2,13 @@ namespace GitInsight.Infrastructure;
 
 public class RepositoryRepository : IRepositoryRepository
 {
+    private readonly Context _context;
+
+    public RepositoryRepository(Context context)
+    {
+        _context = context;
+    }
+
     public async Task<RepositoryDto> CreateAsync(RepositoryCreateDto repository)
     {
         throw new NotImplementedException();

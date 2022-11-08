@@ -46,7 +46,7 @@ public class CommitRepository : ICommitRepository
 
         if (entity is null)
         {
-            response = Response.NotFound;
+            response = NotFound;
         }
         else
         {
@@ -54,7 +54,7 @@ public class CommitRepository : ICommitRepository
 
             await _context.SaveChangesAsync();
 
-            response = Response.Updated;
+            response = Updated;
         }
 
         return response;
@@ -62,21 +62,21 @@ public class CommitRepository : ICommitRepository
 
     public async Task<Response> DeleteAsync(int commitId)
     {
-        var commit = await _context.Commits.FirstOrDefaultAsync(c => c.Id == commitId);
+        var entity = await _context.Commits.FindAsync(commitId);
 
         Response response;
 
-        if (commit is null)
+        if (entity is null)
         {
-            response = Response.NotFound;
+            response = NotFound;
         }
         else
         {
-            _context.Commits.Remove(commit);
+            _context.Commits.Remove(entity);
 
             await _context.SaveChangesAsync();
 
-            response = Response.Deleted;
+            response = Deleted;
         }
 
         return response;
