@@ -1,7 +1,7 @@
 namespace GitInsight.Core;
 
-public record CommitDto(int Id, DateTimeOffset Date);
+public record CommitDto(int Id, string Message, DateTimeOffset Date);
 
-public record CommitCreateDto();
+public record CommitCreateDto(string Message);
 
 public record CommitUpdateDto(int Id);
