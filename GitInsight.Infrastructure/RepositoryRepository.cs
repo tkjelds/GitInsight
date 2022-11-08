@@ -2,27 +2,27 @@ namespace GitInsight.Infrastructure;
 
 public class RepositoryRepository : IRepositoryRepository
 {
-    public (Response response, RepositoryDto repoistory) Create(RepositoryCreateDto repository)
+    public Task<(Response, RepositoryDto)> CreateAsync(RepositoryCreateDto repository)
     {
         throw new NotImplementedException();
     }
 
-    public Response Delete(int repositoryId)
+    public Task<Response> DeleteAsync(int repositoryId)
     {
         throw new NotImplementedException();
     }
 
-    public (Response response, RepositoryDto repository) Find(int repositoryId)
+    public Task<(Response, RepositoryDto)> FindAsync(int repositoryId)
     {
         throw new NotImplementedException();
     }
 
-    public IReadOnlyCollection<RepositoryDto> Read()
+    public Task<IReadOnlyCollection<RepositoryDto>> ReadAsync()
     {
         throw new NotImplementedException();
     }
 
-    public Response Update(RepositoryUpdateDto repository)
+    public Task<Response> UpdateAsync(RepositoryUpdateDto repository)
     {
         throw new NotImplementedException();
     }

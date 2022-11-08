@@ -2,9 +2,9 @@ namespace GitInsight.Core;
 
 public interface ICommitRepository
 {
-    (Response, CommitDto) Create(CommitCreateDto commit);
-    (Response, CommitDto) Find(int commitId);
-    IReadOnlyCollection<CommitDto> Read();
-    Response Update(CommitUpdateDto commit);
-    Response Delete(int commitId);
+    Task<(Response, CommitDto)> CreateAsync(CommitCreateDto commit);
+    Task<(Response, CommitDto)> FindAsync(int commitId);
+    Task<IReadOnlyCollection<CommitDto>> ReadAsync();
+    Task<Response> UpdateAsync(CommitUpdateDto commit);
+    Task<Response> DeleteAsync(int commitId);
 }

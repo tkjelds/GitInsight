@@ -2,9 +2,9 @@ namespace GitInsight.Core;
 
 public interface IAuthorRepository
 {
-    (Response response, AuthorDto author) Create(AuthorCreateDto author);
-    (Response response, AuthorDto author) Find(int authorId);
-    IReadOnlyCollection<AuthorDto> Read();
-    Response Update(AuthorUpdateDto author);
-    Response Delete(int authorId);
+    Task<(Response, AuthorDto)> CreateAsync(AuthorCreateDto author);
+    Task<(Response, AuthorDto)> FindAsync(int authorId);
+    Task<IReadOnlyCollection<AuthorDto>> ReadAsync();
+    Task<Response> UpdateAsync(AuthorUpdateDto author);
+    Task<Response> DeleteAsync(int authorId);
 }

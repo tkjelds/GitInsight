@@ -2,27 +2,27 @@ namespace GitInsight.Infrastructure;
 
 public class CommitRepository : ICommitRepository
 {
-    public (Response, CommitDto) Create(CommitCreateDto commit)
+    public Task<(Response, CommitDto)> CreateAsync(CommitCreateDto commit)
     {
         throw new NotImplementedException();
     }
 
-    public (Response, CommitDto) Find(int commitId)
+    public Task<(Response, CommitDto)> FindAsync(int commitId)
     {
         throw new NotImplementedException();
     }
 
-    public IReadOnlyCollection<CommitDto> Read()
+    public Task<IReadOnlyCollection<CommitDto>> ReadAsync()
     {
         throw new NotImplementedException();
     }
     
-    public Response Update(CommitUpdateDto commit)
+    public Task<Response> UpdateAsync(CommitUpdateDto commit)
     {
         throw new NotImplementedException();
     }
 
-    public Response Delete(int commitId)
+    public Task<Response> DeleteAsync(int commitId)
     {
         throw new NotImplementedException();
     }
