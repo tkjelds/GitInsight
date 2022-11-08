@@ -2,28 +2,83 @@ namespace GitInsight.Infrastructure;
 
 public class CommitRepository : ICommitRepository
 {
-    public Task<(Response, CommitDto)> CreateAsync(CommitCreateDto commit)
+    private readonly Context _context;
+
+    public CommitRepository(Context context)
     {
-        throw new NotImplementedException();
+        _context = context;
     }
 
-    public Task<(Response, CommitDto)> FindAsync(int commitId)
+    public async Task<CommitDto> CreateAsync(CommitCreateDto commit)
     {
-        throw new NotImplementedException();
+        var entity = new Commit(commit.Message);
+
+        _context.Commits.Add(entity);
+
+        await _context.SaveChangesAsync();
+
+        return new CommitDto(entity.Id, entity.Message, entity.Date);
     }
 
-    public Task<IReadOnlyCollection<CommitDto>> ReadAsync()
+    public async Task<CommitDto?> FindAsync(int commitId)
     {
-        throw new NotImplementedException();
+        var commits = from c in _context.Commits
+                      where c.Id == commitId
+                      select new CommitDto(c.Id, c.Message, c.Date);
+        
+        return await commits.FirstOrDefaultAsync();
+    }
+
+    public async Task<IReadOnlyCollection<CommitDto>> ReadAsync()
+    {
+        var commits = from c in _context.Commits
+                      orderby c.Date
+                      select new CommitDto(c.Id, c.Message, c.Date);
+
+        return await commits.ToArrayAsync();
     }
     
-    public Task<Response> UpdateAsync(CommitUpdateDto commit)
+    public async Task<Response> UpdateAsync(CommitUpdateDto commit)
     {
-        throw new NotImplementedException();
+        var entity = await _context.Commits.FindAsync(commit.Id);
+
+        Response response;
+
+        if (entity is null)
+        {
+            response = Response.NotFound;
+        }
+        else
+        {
+            entity.Message = commit.Message;
+
+            await _context.SaveChangesAsync();
+
+            response = Response.Updated;
+        }
+
+        return response;
     }
 
-    public Task<Response> DeleteAsync(int commitId)
+    public async Task<Response> DeleteAsync(int commitId)
     {
-        throw new NotImplementedException();
+        var commit = await _context.Commits.FirstOrDefaultAsync(c => c.Id == commitId);
+
+        Response response;
+
+        if (commit is null)
+        {
+            response = Response.NotFound;
+        }
+        else
+        {
+            _context.Commits.Remove(commit);
+
+            await _context.SaveChangesAsync();
+
+            response = Response.Deleted;
+        }
+
+        return response;
     }
 }

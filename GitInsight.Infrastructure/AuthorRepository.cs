@@ -2,27 +2,27 @@ namespace GitInsight.Infrastructure;
 
 public class AuthorRepository : IAuthorRepository
 {
-    public Task<(Response, AuthorDto)> CreateAsync(AuthorCreateDto author)
+    public async Task<AuthorDto> CreateAsync(AuthorCreateDto author)
     {
         throw new NotImplementedException();
     }
 
-    public Task<(Response, AuthorDto)> FindAsync(int authorId)
+    public async Task<AuthorDto> FindAsync(int authorId)
     {
         throw new NotImplementedException();
     }
 
-    public Task<IReadOnlyCollection<AuthorDto>> ReadAsync()
+    public async Task<IReadOnlyCollection<AuthorDto>> ReadAsync()
     {
         throw new NotImplementedException();
     }
     
-    public Task<Response> UpdateAsync(AuthorUpdateDto author)
+    public async Task<Response> UpdateAsync(AuthorUpdateDto author)
     {
         throw new NotImplementedException();
     }
 
-    public Task<Response> DeleteAsync(int authorId)
+    public async Task<Response> DeleteAsync(int authorId)
     {
         throw new NotImplementedException();
     }
