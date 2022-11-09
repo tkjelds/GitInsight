@@ -15,9 +15,13 @@ public sealed class CommitRepositoryTests : IAsyncDisposable
         var context = new Context(builder.Options);
         context.Database.EnsureCreated();
 
-        Commit commitOne = new Commit("Added this awesome feature!") { Id = 1 };
-        Commit commitTwo = new Commit("Fixed some bugs in the code") { Id = 2 };
-        Commit commitThree = new Commit("Implemented some tests") { Id = 3 };
+        DateTimeOffset dateOne = new DateTimeOffset(2009, 7, 21, 7, 12, 34, new TimeSpan(1, 0, 0));
+        DateTimeOffset dateTwo = new DateTimeOffset(2017, 4, 11, 7, 27, 12, new TimeSpan(1, 0, 0));
+        DateTimeOffset dateThree = new DateTimeOffset(2022, 9, 4, 7, 55, 54, new TimeSpan(1, 0, 0));
+
+        Commit commitOne = new Commit("Added this awesome feature!", dateOne) { Id = 1 };
+        Commit commitTwo = new Commit("Fixed some bugs in the code", dateTwo) { Id = 2 };
+        Commit commitThree = new Commit("Implemented some tests", dateThree) { Id = 3 };
 
         context.Commits.AddRange(commitOne, commitTwo, commitThree);
         context.SaveChanges();
@@ -30,32 +34,32 @@ public sealed class CommitRepositoryTests : IAsyncDisposable
     public async Task CreateAsync_Returns_CommitDto()
     {
         //arrange
-        var commit = new CommitCreateDto("Test commit message");
+        var date = new DateTimeOffset(2022, 11, 9, 15, 11, 55, new TimeSpan(1, 0, 0));
 
-        var expected = new CommitDto(4, "Test commit message", DateTimeOffset.Now);
+        var commit = new CommitCreateDto("Test commit message", date);
+
+        var expected = new CommitDto(4, "Test commit message", date);
 
         //act
         var actual = await _repository.CreateAsync(commit);
 
         //assert
-        Assert.Equal(expected.Id, actual.Id);
-        Assert.Equal(expected.Message, actual.Message);
+        Assert.Equal(expected, actual);
     }
 
     [Fact]
     public async Task FindAsync_With_Existing_Id_Returns_CommitDto()
     {
         //arrange
-        var image = new byte [5];
+        var date = new DateTimeOffset(2009, 7, 21, 7, 12, 34, new TimeSpan(1, 0, 0));
 
-        var expected = new CommitDto(1, "Added this awesome feature!", DateTimeOffset.Now);
+        var expected = new CommitDto(1, "Added this awesome feature!", date);
 
         //act
         var actual = await _repository.FindAsync(1);
 
         //assert
-        Assert.Equal(expected.Id, actual!.Id);
-        Assert.Equal(expected.Message, actual.Message);
+        Assert.Equal(expected, actual);
     }
 
     [Fact]
@@ -82,9 +86,11 @@ public sealed class CommitRepositoryTests : IAsyncDisposable
     public async Task UpdateAsync_With_Existing_Photo_Returns_Updated_Response()
     {
         //arrange
+        var date = new DateTimeOffset(2009, 7, 21, 7, 12, 34, new TimeSpan(1, 0, 0));
+
         var updatedCommit = new CommitUpdateDto(1, "Added some new features");
 
-        var expected = new CommitDto(1, "Added some new features", DateTimeOffset.Now);
+        var expected = new CommitDto(1, "Added some new features", date);
 
         //act
         var response = await _repository.UpdateAsync(updatedCommit);
@@ -93,8 +99,7 @@ public sealed class CommitRepositoryTests : IAsyncDisposable
 
         //assert
         Assert.Equal(Updated, response);
-        Assert.Equal(expected.Id, actual!.Id);
-        Assert.Equal(expected.Message, actual.Message);
+        Assert.Equal(expected, actual);
     }
 
     [Fact]

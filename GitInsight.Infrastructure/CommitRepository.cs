@@ -11,7 +11,7 @@ public class CommitRepository : ICommitRepository
 
     public async Task<CommitDto> CreateAsync(CommitCreateDto commit)
     {
-        var entity = new Commit(commit.Message);
+        var entity = new Commit(commit.Message, commit.Date);
 
         _context.Commits.Add(entity);
 

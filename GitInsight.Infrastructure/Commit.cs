@@ -11,8 +11,9 @@ public class Commit
     public int? RepositoryId { get; set; }
     public virtual Repository? Repository { get; set; }
 
-    public Commit(String message)
+    public Commit(String message, DateTimeOffset date)
     {
         Message = message;
+        Date = date;
     }   
 }
