@@ -15,9 +15,9 @@ public sealed class CommitRepositoryTests : IAsyncDisposable
         var context = new Context(builder.Options);
         context.Database.EnsureCreated();
 
-        Commit commitOne = new Commit("Added this awesome feature!");
-        Commit commitTwo = new Commit("Fixed some bugs in the code");
-        Commit commitThree = new Commit("Implemented some tests");
+        Commit commitOne = new Commit("Added this awesome feature!") { Id = 1 };
+        Commit commitTwo = new Commit("Fixed some bugs in the code") { Id = 2 };
+        Commit commitThree = new Commit("Implemented some tests") { Id = 3 };
 
         context.Commits.AddRange(commitOne, commitTwo, commitThree);
         context.SaveChanges();
