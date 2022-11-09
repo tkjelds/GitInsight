@@ -32,7 +32,7 @@ public class CommitRepository : ICommitRepository
     public async Task<IReadOnlyCollection<CommitDto>> ReadAsync()
     {
         var commits = from c in _context.Commits
-                      orderby c.Date
+                      orderby c.Message
                       select new CommitDto(c.Id, c.Message, c.Date);
 
         return await commits.ToArrayAsync();

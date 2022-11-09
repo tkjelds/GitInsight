@@ -27,9 +27,110 @@ public sealed class CommitRepositoryTests : IAsyncDisposable
     }
 
     [Fact]
-    public void Test1()
+    public async Task CreateAsync_Returns_CommitDto()
     {
+        //arrange
+        var commit = new CommitCreateDto("Test commit message");
 
+        var expected = new CommitDto(4, "Test commit message", DateTimeOffset.Now);
+
+        //act
+        var actual = await _repository.CreateAsync(commit);
+
+        //assert
+        Assert.Equal(expected.Id, actual.Id);
+        Assert.Equal(expected.Message, actual.Message);
+    }
+
+    [Fact]
+    public async Task FindAsync_With_Existing_Id_Returns_CommitDto()
+    {
+        //arrange
+        var image = new byte [5];
+
+        var expected = new CommitDto(1, "Added this awesome feature!", DateTimeOffset.Now);
+
+        //act
+        var actual = await _repository.FindAsync(1);
+
+        //assert
+        Assert.Equal(expected.Id, actual!.Id);
+        Assert.Equal(expected.Message, actual.Message);
+    }
+
+    [Fact]
+    public async Task FindAsync_With_Non_Existing_Id_Returns_Null()
+    {
+        //act
+        var actual = await _repository.FindAsync(55);
+
+        //assert
+        Assert.Null(actual);
+    }
+
+    [Fact]
+    public async Task ReadAsync_Returns_CommitDto_Array()
+    {
+        //act
+        var actual = await _repository.ReadAsync();
+
+        //assert
+        Assert.Equal(3, actual.Count);
+    }
+
+    [Fact]
+    public async Task UpdateAsync_With_Existing_Photo_Returns_Updated_Response()
+    {
+        //arrange
+        var updatedCommit = new CommitUpdateDto(1, "Added some new features");
+
+        var expected = new CommitDto(1, "Added some new features", DateTimeOffset.Now);
+
+        //act
+        var response = await _repository.UpdateAsync(updatedCommit);
+
+        var actual = await _repository.FindAsync(1);
+
+        //assert
+        Assert.Equal(Updated, response);
+        Assert.Equal(expected.Id, actual!.Id);
+        Assert.Equal(expected.Message, actual.Message);
+    }
+
+    [Fact]
+    public async Task UpdateAsync_With_Non_Existing_Photo_Returns_NotFound_Response()
+    {
+        //arrange
+        var updatedCommit = new CommitUpdateDto(55, "This commit does not exist");
+
+        //act
+        var response = await _repository.UpdateAsync(updatedCommit);
+
+        //assert
+        Assert.Equal(NotFound, response);
+    }
+
+    [Fact]
+    public async Task DeleteAsync_With_Existing_Id_Returns_Deleted_Response()
+    {
+        //act
+        var response = await _repository.DeleteAsync(1);
+
+        var deleted = await _context.Commits.FindAsync(1);
+
+        //assert
+        Assert.Equal(Deleted, response);
+        Assert.Null(deleted);
+    }
+
+    [Fact]
+    public async Task DeleteAsync_With_Non_Existing_Id_Returns_NotFound_Response()
+    {
+        //act
+        var response = await _repository.DeleteAsync(55);
+
+        //assert
+        Assert.Equal(NotFound, response);
     }
 
     public async ValueTask DisposeAsync()
