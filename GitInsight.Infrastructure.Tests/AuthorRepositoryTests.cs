@@ -26,7 +26,7 @@ public sealed class AuthorRepositoryTests : IAsyncDisposable
         _repository = new AuthorRepository(_context);
     }
 
-     [Fact]
+    [Fact]
     public async Task CreateAsync_Returns_AuthorDto()
     {
         //arrange
@@ -70,7 +70,7 @@ public sealed class AuthorRepositoryTests : IAsyncDisposable
         //arrange
         var expected = new AuthorDto[] 
         {
-            //Returns sorted list by names, hence the ordering
+            //Returns list sorted by names, hence the ordering
             new (1, "Bob"),
             new (3, "Carl"),
             new (2, "John")
